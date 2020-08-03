@@ -1,20 +1,11 @@
 package cn.com.bd.func.connect;
 
-import cn.com.bd.func.join.OrderMap;
-import cn.com.bd.func.join.OrderStatusMap;
 import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;
 import cn.com.bd.utils.StreamCreater;
-import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
-import org.apache.flink.streaming.api.functions.ProcessFunction;
-import org.apache.flink.streaming.api.functions.co.CoProcessFunction;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.util.Collector;
 
 /**
  * 非window场景下两个流的join处理

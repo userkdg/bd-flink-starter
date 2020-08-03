@@ -1,16 +1,13 @@
 package cn.com.bd.func.connect;
 
-import cn.com.bd.func.join.OrderMap;
-import cn.com.bd.func.join.OrderStatusMap;
+import cn.com.bd.func.map.OrderMap;
+import cn.com.bd.func.map.OrderStatusMap;
 import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;
 import cn.com.bluemoon.bd.flink.func.join.OneToOneJoin;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.table.api.StreamQueryConfig;
-import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.java.StreamTableEnvironment;
 
 /**
  * 1.在socket服务器上执行命令（分别开两个shell窗口）：
