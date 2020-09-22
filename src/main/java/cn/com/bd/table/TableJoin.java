@@ -1,7 +1,7 @@
 package cn.com.bd.table;
 
-import cn.com.bd.func.join.OrderMap;
-import cn.com.bd.func.join.OrderStatusMap;
+import cn.com.bd.func.map.OrderMap;
+import cn.com.bd.func.map.OrderStatusMap;
 import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;

@@ -15,6 +15,7 @@ tmp
 *.swp
 *.jar
 *.log
+*.log.*
 .DS_Store
 build-target
 flink-end-to-end-tests/flink-datastream-allround-test/src/main/java/org/apache/flink/streaming/tests/avro/

@@ -1,21 +1,15 @@
 package cn.com.bd.func.join;
 
+import cn.com.bd.func.map.OrderMap;
+import cn.com.bd.func.map.OrderStatusMap;
 import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;
-import cn.com.bd.utils.StreamCreater;
-import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.functions.JoinFunction;
-import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.windowing.assigners.ProcessingTimeSessionWindows;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
-
-import java.util.stream.Stream;
 
 /**
  * window join连接两个流的元素，它们共享一个公共key并位于同一个窗口中

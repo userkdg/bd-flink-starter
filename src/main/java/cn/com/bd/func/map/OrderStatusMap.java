@@ -1,6 +1,5 @@
-package cn.com.bd.func.join;
+package cn.com.bd.func.map;
 
-import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderStatus;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.flink.api.common.functions.MapFunction;
