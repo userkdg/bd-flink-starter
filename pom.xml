@@ -6,7 +6,7 @@
 
     <groupId>cn.com.bd</groupId>
     <artifactId>bd-flink-java-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <name>bd-flink-java-starter</name>
     <!-- FIXME change it to the project's website -->
