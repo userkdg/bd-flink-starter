@@ -2,7 +2,8 @@ package cn.com.bd.func.broadcast;
 
 import cn.com.bd.pojo.Platform;
 import cn.com.bluemoon.bd.utils.ThreadUtils;
-import org.apache.flink.calcite.shaded.com.google.common.collect.Lists;
+
+import com.google.common.collect.Lists;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
 import java.util.List;

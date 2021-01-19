@@ -8,9 +8,10 @@ import cn.com.bd.pojo.OrderStatus;
 import cn.com.bluemoon.bd.flink.func.filter.TwoJoinFilterByTimestamp;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.table.api.StreamQueryConfig;
+
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.java.StreamTableEnvironment;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+
 
 /**
  * 1.在socket服务器上执行命令（分别开两个shell窗口）：
@@ -42,7 +43,6 @@ public class TableJoin {
     public static void main(String[] args) throws Exception {
         String serverIp = "192.168.235.12";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        StreamQueryConfig queryConfig = new StreamQueryConfig();
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
         DataStream<Order> orderStream = env.socketTextStream(serverIp, 9990, "\n").map(new OrderMap());
         DataStream<OrderStatus> orderStatusStream = env.socketTextStream(serverIp, 9991, "\n").map(new OrderStatusMap());
