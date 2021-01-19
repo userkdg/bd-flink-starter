@@ -6,12 +6,20 @@ import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;
 import cn.com.bluemoon.bd.flink.func.filter.TwoJoinFilterByTimestamp;
+import cn.com.bluemoon.bd.flink.utils.FieldUtils;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+<<<<<<< HEAD
 
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
+=======
+import org.apache.flink.table.api.EnvironmentSettings;
+import org.apache.flink.table.api.Table;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+import org.apache.flink.types.Row;
+>>>>>>> c3e365e46c17b56bef73c4d531fdb482488ef72c
 
 /**
  * 1.在socket服务器上执行命令（分别开两个shell窗口）：
@@ -30,30 +38,42 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
  * orderStatus:（9991上输入）
  * 1,2020-03-28 09:10:00,1
  * 1,2020-03-28 09:20:00,2
- * 1,2020-03-28 09:30:00,3
+ * 1,2020-03-28 09:31:00,3
  * 1,2020-03-28 09:40:00,4
  */
 public class TableJoin {
     private final static String ORDER_TABLE = "ec_order";
     private final static String ORDER_STATUS_TABLE = "order_status";
-    private final static String ORDER_FIELDS = "orderCode,payment,platform,timestamp1";
-    private final static String ORDER_STATUS_FIELDS = "orderCode,payTime,handleType,timestamp2";
-    private final static String SQL = "select o.*,os.payTime,os.handleType,os.timestamp2 from " + ORDER_TABLE + " o inner join " + ORDER_STATUS_TABLE + " os on o.orderCode=os.orderCode";
+    private final static String ORDER_JOIN = "order_join";
+    private final static String ORDER_FIELDS = FieldUtils.getFieldNames(Order.class);
+    private final static String ORDER_STATUS_FIELDS = FieldUtils.getFieldNames(OrderStatus.class);
+    private final static String JOIN_SQL = "select o.*,os.payTime,os.handleType,os.timestamp2 from " + ORDER_TABLE + " o inner join " + ORDER_STATUS_TABLE + " os on o.orderCode=os.orderCode";
+    private final static String SQL2 = "select platform, sum(payment) as payment from (select * from (" +
+            "select orderCode, payment, payTime, handleType, platform, row_number() over(partition by orderCode order by payTime desc) as row_num " +
+            "from " + ORDER_JOIN + ") t " +
+            "where t.row_num=1) t2 group by platform";
 
     public static void main(String[] args) throws Exception {
         String serverIp = "192.168.235.12";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+<<<<<<< HEAD
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
+=======
+        EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
+        StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, settings);
+>>>>>>> c3e365e46c17b56bef73c4d531fdb482488ef72c
         DataStream<Order> orderStream = env.socketTextStream(serverIp, 9990, "\n").map(new OrderMap());
         DataStream<OrderStatus> orderStatusStream = env.socketTextStream(serverIp, 9991, "\n").map(new OrderStatusMap());
-        tableEnv.registerDataStream(ORDER_TABLE, orderStream, ORDER_FIELDS);
-        tableEnv.registerDataStream(ORDER_STATUS_TABLE, orderStatusStream, ORDER_STATUS_FIELDS);
-        Table table = tableEnv.sqlQuery(SQL);
-//        tableEnv.toRetractStream(table, OrderDetail.class).print();
-        tableEnv.toRetractStream(table, OrderDetail.class)
-                .map(i -> i.f1)
-                .keyBy(OrderDetail::getOrderCode)
-                .filter(new TwoJoinFilterByTimestamp("orderDetail"))
+        tableEnv.createTemporaryView(ORDER_TABLE, orderStream, FieldUtils.convertFieldArray(ORDER_FIELDS));
+        tableEnv.createTemporaryView(ORDER_STATUS_TABLE, orderStatusStream, FieldUtils.convertFieldArray(ORDER_STATUS_FIELDS));
+        Table table = tableEnv.sqlQuery(JOIN_SQL);
+        DataStream<OrderDetail> ddStream = tableEnv.toRetractStream(table, OrderDetail.class)
+                  .map(i -> i.f1)
+                  .keyBy(OrderDetail::getOrderCode)
+                  .filter(new TwoJoinFilterByTimestamp("orderDetail"));
+        tableEnv.createTemporaryView(ORDER_JOIN, ddStream, FieldUtils.convertFieldArray(FieldUtils.getFieldNames(OrderDetail.class)));
+        table = tableEnv.sqlQuery(SQL2);
+        tableEnv.toRetractStream(table, Row.class)
                 .print();
         env.execute();
     }

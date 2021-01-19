@@ -9,6 +9,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import java.util.List;
 
 public class StreamCreater {
+
     public static DataStream<Order> createOrderStream(StreamExecutionEnvironment env) {
         List<Order> orders = Lists.newArrayList();
         orders.add(new Order(1, 10, "京东"));
@@ -34,4 +35,5 @@ public class StreamCreater {
         statusList.add(new OrderStatus(7, "2020-03-28 09:17:00", 2));
         return env.fromCollection(statusList);
     }
+
 }

@@ -6,7 +6,7 @@
 
     <groupId>cn.com.bd</groupId>
     <artifactId>bd-flink-java-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
 
     <name>bd-flink-java-starter</name>
     <!-- FIXME change it to the project's website -->
@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>cn.com.bluemoon.bd</groupId>
             <artifactId>bd-flink-common</artifactId>
@@ -49,7 +55,17 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
+<<<<<<< HEAD
             <artifactId>flink-streaming-java_2.12</artifactId>
+=======
+            <artifactId>flink-table-planner-blink_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-api-java-bridge_2.11</artifactId>
+>>>>>>> c3e365e46c17b56bef73c4d531fdb482488ef72c
             <version>${flink.version}</version>
             <scope>provided</scope>
             <exclusions>
@@ -66,6 +82,17 @@
             <version>${flink.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-json</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
         <dependency>
             <groupId>cn.com.bluemoon.bd</groupId>
             <artifactId>bd-common-spring</artifactId>

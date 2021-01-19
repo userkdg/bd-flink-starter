@@ -36,11 +36,14 @@ import org.apache.flink.streaming.api.windowing.time.Time;
  * 2,20,天猫
  * 3,30,京东
  * 4,40,京东
+ * 4,50,京东
  *
  * orderStatus:（9991上输入）
  * 1,2020-03-28 09:10:00,1
  * 2,2020-03-28 09:20:00,2
  * 3,2020-03-28 09:30:00,1
+ * 4,2020-03-28 09:40:00,1
+ * 4,2020-03-28 09:50:00,1
  */
 public class Join {
     public static void main( String[] args) throws Exception {
@@ -53,7 +56,7 @@ public class Join {
         orderStream.join(orderStatusStream)
                 .where(Order::getOrderCode)
                 .equalTo(OrderStatus::getOrderCode)
-                .window(TumblingProcessingTimeWindows.of(Time.seconds(30)))
+                .window(TumblingProcessingTimeWindows.of(Time.seconds(60)))
                 .apply(new JoinFunction<Order, OrderStatus, OrderDetail>() {
                        @Override
                        public OrderDetail join(Order order, OrderStatus orderStatus) throws Exception {
