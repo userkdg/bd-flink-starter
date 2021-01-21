@@ -31,9 +31,9 @@ public class SQLConstants {
             + " 'zookeeper.quorum' = '192.168.235.51:2181,192.168.235.52:2181,192.168.235.53:2181'"
             + ")";
 
+    public static final String SQL_QUERY = "create view rt_s_order_shop_sum "
+            + " as select shop_code, cast(sum(order_pay_amt) as varchar) as order_pay_amt from " + SQLConstants.SOURCE_TABLE + " where order_status >= 3 group by shop_code";
+
     public static final String SQL_R_1 = "insert into rt_s_test_order "
-            + " select shop_code as rowkey, ROW(shop_code, order_pay_amt) from "
-            + " ("
-            + " select shop_code, cast(sum(order_pay_amt) as varchar) as order_pay_amt from " + SQLConstants.SOURCE_TABLE + " where order_status >= 3 group by shop_code"
-            + " )";
+            + " select shop_code as rowkey, ROW(shop_code, order_pay_amt) from rt_s_order_shop_sum";
 }
