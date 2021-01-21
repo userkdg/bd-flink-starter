@@ -9,14 +9,14 @@ public class SQLConstants {
             + " order_code int,"
             + " shop_code string,"
             + " order_pay_amt float,"
+            + " order_status int,"
             + " create_time string"
             + " ) with ("
             + " 'connector' = 'kafka',"
             + " 'topic' = 'rt.test.test_order',"
             + " 'properties.bootstrap.servers' = '192.168.235.51:9092,192.168.235.52:9092,192.168.235.53:9092',"
             + " 'properties.group.id' = 'bd-flink-test',"
-            + " 'format' = 'canal-json',"
-            + " 'scan.startup.mode' = 'earliest-offset'"
+            + " 'format' = 'canal-json'"
             + " )";
 
     public static final String SQL_CREATE_TABLE_SINK = "create table " + SINK_TABLE + "("
@@ -34,6 +34,6 @@ public class SQLConstants {
     public static final String SQL_R_1 = "insert into rt_s_test_order "
             + " select shop_code as rowkey, ROW(shop_code, order_pay_amt) from "
             + " ("
-            + " select shop_code, cast(sum(order_pay_amt) as varchar) as order_pay_amt from " + SQLConstants.SOURCE_TABLE + " group by shop_code"
+            + " select shop_code, cast(sum(order_pay_amt) as varchar) as order_pay_amt from " + SQLConstants.SOURCE_TABLE + " where order_status >= 3 group by shop_code"
             + " )";
 }
