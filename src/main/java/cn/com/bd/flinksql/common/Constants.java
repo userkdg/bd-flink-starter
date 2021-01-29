@@ -13,7 +13,7 @@ public class Constants {
             "order_status bigint,\n" +
             "handle_type bigint\n" +
             ") with (\n" +
-            " 'connector' = 'kafka-0.10',\n" +
+            " 'connector' = 'kafka',\n" +
             " 'topic' = 'rt.test.ec_oms_order_status_2',\n" +
             " 'properties.bootstrap.servers' = '192.168.243.25:9092,192.168.243.26:9092,192.168.243.27:9092',\n" +
             " 'properties.group.id' = 'testGroup',\n" +
@@ -29,7 +29,7 @@ public class Constants {
             "storehouse_name string,\n" +
             "order_pay_amt decimal(20, 2)\n" +
             ") with (\n" +
-            "'connector' = 'kafka-0.10',\n" +
+            "'connector' = 'kafka',\n" +
             " 'topic' = 'rt.test.ec_oms_order_2',\n" +
             " 'properties.bootstrap.servers' = '192.168.243.25:9092,192.168.243.26:9092,192.168.243.27:9092',\n" +
             " 'properties.group.id' = 'testGroup',\n" +
