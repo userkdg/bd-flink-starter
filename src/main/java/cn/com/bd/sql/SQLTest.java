@@ -12,6 +12,7 @@ public class SQLTest {
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, settings);
         tableEnv.executeSql(SQLConstants.SQL_CREATE_TABLE);
         tableEnv.executeSql(SQLConstants.SQL_CREATE_TABLE_SINK);
+        tableEnv.executeSql(SQLConstants.SQL_QUERY);
         tableEnv.executeSql(SQLConstants.SQL_R_1);
     }
 }
