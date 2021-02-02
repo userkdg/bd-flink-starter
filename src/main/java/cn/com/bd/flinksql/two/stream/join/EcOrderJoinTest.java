@@ -1,4 +1,4 @@
-package cn.com.bd.flinksql;
+package cn.com.bd.flinksql.two.stream.join;
 
 import cn.com.bd.flinksql.common.Constants;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
