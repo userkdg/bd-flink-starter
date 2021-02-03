@@ -55,18 +55,24 @@ public class NotExistsSQLConstants {
             " from order_view" +
             " where order_type in('1', '3') and order_status = '4'";
 
+    public final static String EFF_ORDER_ACT = "create view eff_order_act as select *" +
+            " from order_act od" +
+            " where not exists (select order_code from rfnd_order_act r where od.order_code = r.order_code)";
+
     // 根据订单事实表进行聚合操作
     public final static String ORDER_GROUP_BY_SQL = "create view order_sum as select province, city," +
             " sum(order_received_amt) as order_received_amt," +
-            " sum(order_pay_amt) as order_pay_amt" +
+            " sum(order_pay_amt) as order_pay_amt," +
+            " count(distinct order_code) as order_cnt" +
             " from order_act " +
             " group by province, city";
 
-    // 根据退款事实表进行聚合操作
-    public final static String RFND_ORDER_GROUP_BY_SQL = "create view rfnd_order_sum as select province, city," +
-            " sum(order_received_amt) as rfnd_actual_amt," +
-            " sum(order_pay_amt) as rfnd_pay_amt" +
-            " from rfnd_order_act" +
+    // 根据有效订单事实表进行聚合
+    public final static String RFND_ORDER_GROUP_BY_SQL = "create view eff_order_sum as select province, city," +
+            " sum(order_received_amt) as eff_actual_amt," +
+            " sum(order_pay_amt) as eff_pay_amt," +
+            " count(distinct order_code) as eff_order_cnt" +
+            " from eff_order_act" +
             " group by province, city";
 
     // 根据订单事实表以及退款事实表求客户数以及退款客户数
@@ -80,9 +86,8 @@ public class NotExistsSQLConstants {
             " group by od.province, od.city";
 
     public final static String EXISTS_CUS = "create view exists_cus as" +
-            " select od.province, od.city, count(distinct buyer_nick) as cus_qty" +
-            " from order_act od " +
-            " where not exists (select order_code from rfnd_order_act r where od.order_code = r.order_code)" +
+            " select province, city, count(distinct buyer_nick) as cus_qty" +
+            " from eff_order_act" +
             " group by province, city";
 
 
@@ -95,19 +100,20 @@ public class NotExistsSQLConstants {
 
     // 将数据写入HBase
     public final static String INSERT_INTO_HBASE_ORDER = "insert into sum_to_hbase" +
-            " select rowkey as rowkey, ROW(province, city, order_received_amt, order_pay_amt)" +
+            " select rowkey as rowkey, ROW(order_received_amt, order_pay_amt, order_cnt, province, city)" +
             " from (" +
             " select concat_ws('_', province, city) as rowkey, cast(order_received_amt as varchar) as order_received_amt," +
-            " cast(order_pay_amt as varchar) as order_pay_amt, province, city" +
+            " cast(order_pay_amt as varchar) as order_pay_amt, cast(order_cnt as varchar) as order_cnt, province, city" +
             " from order_sum" +
             " )";
-    public final static String INSERT_INTO_HBASE_RFND = "insert into sum_to_hbase" +
-            " select rowkey as rowkey, ROW(province, city, rfnd_actual_amt, rfnd_pay_amt)" +
+    public final static String INSERT_INTO_HBASE_EFF = "insert into eff_sum_to_hbase" +
+            " select rowkey as rowkey, ROW(eff_actual_amt, eff_pay_amt, eff_order_cnt, province, city)" +
             " from (" +
-            " select concat_ws('_', province, city) as rowkey, cast(rfnd_actual_amt as varchar) as rfnd_actual_amt," +
-            " cast(rfnd_pay_amt as varchar) as rfnd_pay_amt, province, city" +
-            " from rfnd_order_sum" +
+            " select concat_ws('_', province, city) as rowkey, cast(eff_actual_amt as varchar) as eff_actual_amt," +
+            " cast(eff_pay_amt as varchar) as eff_pay_amt, cast(eff_order_cnt as varchar) as eff_order_cnt, province, city" +
+            " from eff_order_sum" +
             " )";
+
     public final static String INSERT_INTO_HBASE_CUS_CNT = "insert into cnt_to_hnbase" +
             " select rowkey as rowkey, ROW(cntn_cus_qty, rfnd_cus_qty, cus_qty, province, city) " +
             " from (" +
@@ -119,7 +125,20 @@ public class NotExistsSQLConstants {
     // 创建订单汇总表的HBase schema
     public final static String ORDER_HBASE_SCHEMA = "create table sum_to_hbase (\n" +
             "        rowkey STRING,\n" +
-            "        info ROW<order_pay_amt STRING, order_received_amt STRING, order_cnt STRING, rfnd_actual_amt STRING, rfnd_pay_amt STRING, rfnd_order_cnt STRING, province STRING, city STRING>,\n" +
+            "        info ROW<order_pay_amt STRING, order_received_amt STRING, order_cnt STRING, province STRING, city STRING>,\n" +
+            "        PRIMARY KEY (rowkey) NOT ENFORCED\n" +
+            "        ) with (\n" +
+            "        'connector' = 'hbase-1.4',\n" +
+            "        'sink.buffer-flush.max-rows'='1',\n" +
+            "        'sink.buffer-flush.interval'='1s',\n" +
+            "        'table-name' = 'rt_s_ec_sa_area_order_sum',\n" +
+            "        'zookeeper.quorum' = '192.168.235.51:2181,192.168.235.52:2181,192.168.235.53:2181'\n" +
+            "       )";
+
+    // 创建订单汇总表的HBase schema
+    public final static String EFF_ORDER_HBASE_SCHEMA = "create table eff_sum_to_hbase (\n" +
+            "        rowkey STRING,\n" +
+            "        info ROW<eff_actual_amt STRING, eff_pay_amt STRING, eff_order_cnt STRING, province STRING, city STRING>,\n" +
             "        PRIMARY KEY (rowkey) NOT ENFORCED\n" +
             "        ) with (\n" +
             "        'connector' = 'hbase-1.4',\n" +
