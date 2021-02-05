@@ -11,7 +11,7 @@ import org.apache.flink.types.Row;
  * @createAt 2021-02-04 15:41
  * @description
  */
-public class Test {
+public class KeyKafkaRegisterUpsertKafkaTest {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment();
         EnvironmentSettings build = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
@@ -39,7 +39,5 @@ public class Test {
         tableEnv.toRetractStream(table, Row.class).print();
 
         env.execute();
-
-
     }
 }
