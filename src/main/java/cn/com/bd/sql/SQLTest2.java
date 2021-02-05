@@ -2,7 +2,7 @@ package cn.com.bd.sql;
 
 import cn.com.bd.func.map.OrderMap;
 import cn.com.bd.pojo.Order;
-import cn.com.bluemoon.bd.flink.utils.FieldUtils;
+import cn.com.bd.utils.FieldUtils;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.EnvironmentSettings;

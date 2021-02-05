@@ -1,6 +1,7 @@
 package cn.com.bd.pojo;
 
-import cn.com.bluemoon.bd.flink.func.filter.ITwoTimestamp;
+
+import cn.com.bd.func.filter.ITwoTimestamp;
 import lombok.Data;
 
 import java.io.Serializable;
