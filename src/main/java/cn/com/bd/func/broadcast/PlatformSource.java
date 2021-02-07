@@ -1,7 +1,7 @@
 package cn.com.bd.func.broadcast;
 
 import cn.com.bd.pojo.Platform;
-import cn.com.bluemoon.bd.utils.ThreadUtils;
+import cn.com.bd.utils.ThreadUtils;
 
 import com.google.common.collect.Lists;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
