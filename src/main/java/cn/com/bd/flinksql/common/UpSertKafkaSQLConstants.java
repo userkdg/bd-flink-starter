@@ -32,7 +32,7 @@ public class UpSertKafkaSQLConstants {
             " 'topic' = 'flink_common_json_order'," +
             " 'properties.bootstrap.servers' = '192.168.243.25:9092,192.168.243.26:9092,192.168.243.27:9092'," +
             " 'properties.group.id' = 'testGroup'," +
-            " 'scan.startup.mode' = 'earliest-offset'," +
+            " 'scan.startup.mode' = 'latest-offset'," +
             " 'format' = 'json'" +
             " )";
 
@@ -62,10 +62,23 @@ public class UpSertKafkaSQLConstants {
             " ) with (" +
             " 'connector' = 'upsert-kafka'," +
             " 'topic' = 'kafka_upsert_order_res'," +
-            " 'properties.bootstrap.servers' = '192.168.243.25:9092,192.168.243.26:9092,192.168.243.27:9092'," +
+            " 'properties.bootstrap.servers' = '192.168.243.38:9092,192.168.243.39:9092,192.168.243.40:9092'," +
             " 'key.format' = 'json'," +
             " 'key.json.ignore-parse-errors' = 'true'," +
             " 'value.json.fail-on-missing-field' = 'false'," +
+            " 'value.format' = 'json'" +
+            " )";
+
+    public final static String REGISTER_KAFKA = "create table kafka_table (" +
+            " order_code string," +
+            " order_type bigint," +
+            " order_status bigint," +
+            " handle_type bigint," +
+            " pt timestamp" +
+            " ) with (" +
+            " 'connector' = 'kafka'," +
+            " 'topic' = 'kafka_order_res'," +
+            " 'properties.bootstrap.servers' = '192.168.243.38:9092,192.168.243.39:9092,192.168.243.40:9092'," +
             " 'value.format' = 'json'" +
             " )";
 
