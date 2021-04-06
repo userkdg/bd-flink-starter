@@ -20,9 +20,10 @@ public class MysqlCDCDemo {
         // 创建MySQL CDC表
         tableEnv.executeSql(Constants.REGISTER_CDC_TABLE);
 
-        // 注册changelog Kafka
-        tableEnv.executeSql(Constants.CHANGELOG_KAFKA);
+        // 注册debezium Kafka
+        tableEnv.executeSql(Constants.DEBEZIUM_KAFKA);
 
-        tableEnv.executeSql(" insert into changelog_kafka select * from express");
+        // 将数据写入Kafka
+        tableEnv.executeSql("insert into debezium_kafka select * from express");
     }
 }

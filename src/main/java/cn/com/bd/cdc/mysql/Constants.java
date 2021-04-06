@@ -28,7 +28,7 @@ public class Constants {
             ")";
 
     // 定义changelog Kafka
-    public final static String CHANGELOG_KAFKA = "create table changelog_kafka (" +
+    public final static String DEBEZIUM_KAFKA = "create table debezium_kafka (" +
             " data_id string," +
             " pk_express_id bigint," +
             " express_code bigint," +
