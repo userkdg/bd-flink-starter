@@ -1,0 +1,3 @@
+
+cn.com.bd.flinksql.source.socket.connector.ChangelogCsvFormatFactory
+cn.com.bd.flinksql.source.socket.connector.SocketDynamicTableFactory
