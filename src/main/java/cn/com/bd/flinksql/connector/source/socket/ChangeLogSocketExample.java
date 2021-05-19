@@ -1,4 +1,4 @@
-package cn.com.bd.flinksql.source.socket.connector;
+package cn.com.bd.flinksql.connector.source.socket;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
@@ -29,6 +29,7 @@ public class ChangeLogSocketExample {
                 " 'changelog-csv.column-delimiter' = '|'\n" +
                 ")");
 
-        tableEnv.executeSql("select * from userScore").print();
+//        tableEnv.executeSql("select * from userScore").print();
+        tableEnv.executeSql("select name, avg(score) as avg_score from userScore group by name").print();
     }
 }

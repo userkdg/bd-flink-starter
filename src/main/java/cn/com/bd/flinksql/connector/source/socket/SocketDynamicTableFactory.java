@@ -1,4 +1,4 @@
-package cn.com.bd.flinksql.source.socket.connector;
+package cn.com.bd.flinksql.connector.source.socket;
 
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.configuration.ConfigOption;
