@@ -36,19 +36,19 @@ import java.time.Duration;
  * 窗口示例：窗口大小为10s的滚动窗口，如[2021-4-21 10:00:00.000, 2021-4-21 10:00:10.000)，等价于[2021-4-21 10:00:00.000, 2021-4-21 10:00:09.999]
  *         假设允许延时2s，下述的描述中都以这个示例为主。
  * 窗口创建：当属于该窗口的第一个数据元素到达时，立即创建
- * 窗口移除：当watermark >= window end timestamp + allowed lateness - 1，以窗口[2021-4-21 10:00:00.000, 2021-4-21 10:00:10.000)，延时2s
- *         为例，即，watermark >= 2021-4-21 10:00:11.999
+ * 窗口移除：当watermark >= window end timestamp + allowed lateness，以窗口[2021-4-21 10:00:00.000, 2021-4-21 10:00:10.000)，延时2s
+ *         为例，即，watermark >= 2021-4-21 10:00:12.000
  * 窗口触发计算：
- *         1.当watermark >= window end timestamp - 1时，发生main firing，触发窗口的第一次计算，如watermark >= 2021-4-21 10:00:09.999；
+ *         1.当watermark >= window end timestamp时，发生main firing，触发窗口的第一次计算，如watermark >= 2021-4-21 10:00:10.000；
  *         2.在1已经发生的情况下，新到来的event timestamp仍是属于这个窗口内，即，2021-4-21 10:00:00.000 <= event timestamp < 2021-4-21 10:00:10.000，
  *           并且窗口还没有到达移除的条件，那么，此时，对于新来的数据，都会触发一次窗口计算，每新来一条，都是如此；
- *         3.在什么条件下会把延迟的数据能旁路输出呢，即，当watermark >= window end timestamp + allowed lateness - 1时，对于延时的数据，都会
- *           发到侧流中，如对于窗口[2021-4-21 10:00:00.000, 2021-4-21 10:00:10.000)，允许延时2s，假设当前watermark = 2021-4-21 10:00:11.999，那么，
+ *         3.在什么条件下会把延迟的数据能旁路输出呢，即，当watermark >= window end timestamp + allowed lateness时，对于延时的数据，都会
+ *           发到侧流中，如对于窗口[2021-4-21 10:00:00.000, 2021-4-21 10:00:10.000)，允许延时2s，假设当前watermark >= 2021-4-21 10:00:12.000，那么，
  *           当新到过一条事件时间是2021-4-21 10:00:05的数据时，那么，这条数据不会触发窗口的计算，只会旁路输出。
  *         4.对上述计算的总结:
- *           a. 当第一次watermark >= window end timestamp - 1时，会首次触发整个窗口的计算；
- *           b. 在窗口已触发过计算的前提下，当watermark ε [window end timestamp - 1, window end timestamp + allowed lateness - 1)时，每新到一条该窗口的数据，都会触发一次窗口的完整计算；
- *           c. 当watermark >= window end timestamp + allowed lateness - 1时，每到达一条该窗口的数据，都不会触发窗口计算，但可以通过侧流获取该延迟的数据；
+ *           a. 当第一次watermark >= window end timestamp时，会首次触发整个窗口的计算；
+ *           b. 在窗口已触发过计算的前提下，当watermark ε [window end timestamp, window end timestamp + allowed lateness)时，每新到一条该窗口的数据，都会触发一次窗口的完整计算；
+ *           c. 当watermark >= window end timestamp + allowed lateness时，每到达一条该窗口的数据，都不会触发窗口计算，但可以通过侧流获取该延迟的数据；
  *
  * 1.在socket服务器上执行命令：
  * nc -l 9995
@@ -57,7 +57,9 @@ import java.time.Duration;
  1,10,2021-04-21 10:00:02
  1,5,2021-04-21 10:00:05
  1,50,2021-04-21 10:00:10
+ 1,10,2021-04-21 10:00:04
  1,6,2021-04-21 10:00:11
+ 1,10,2021-04-21 10:00:06
  1,7,2021-04-21 10:00:12
  1,8,2021-04-21 10:00:04
  1,20,2021-04-21 10:00:15
