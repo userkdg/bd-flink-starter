@@ -33,7 +33,7 @@ import org.joda.time.DateTimeZone;
  *
  */
 public class ProcessFunctionWindowAgg {
-    private static String SERVER_IP = "192.168.235.12";
+    private static String SERVER_IP = "192.168.243.21";
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

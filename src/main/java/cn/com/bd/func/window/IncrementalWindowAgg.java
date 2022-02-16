@@ -32,7 +32,7 @@ import org.joda.time.DateTimeZone;
  *      也可以获取到满足各种场景输出所需要的数据。
  */
 public class IncrementalWindowAgg {
-    private static String SERVER_IP = "192.168.235.12";
+    private static String SERVER_IP = "192.168.243.21";
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

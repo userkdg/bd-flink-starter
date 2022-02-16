@@ -47,7 +47,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
  */
 public class Join {
     public static void main( String[] args) throws Exception {
-        String serverIp = "192.168.235.12";
+        String serverIp = "192.168.243.21";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<Order> orderStream = env.socketTextStream(serverIp, 9990, "\n")
                 .map(new OrderMap());

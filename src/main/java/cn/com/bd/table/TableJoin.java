@@ -49,7 +49,7 @@ public class TableJoin {
             "where t.row_num=1) t2 group by platform";
 
     public static void main(String[] args) throws Exception {
-        String serverIp = "192.168.235.12";
+        String serverIp = "192.168.243.21";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, settings);

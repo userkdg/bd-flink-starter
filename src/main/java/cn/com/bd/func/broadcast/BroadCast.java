@@ -6,10 +6,13 @@ import cn.com.bd.pojo.Order;
 import cn.com.bd.pojo.OrderDetail;
 import cn.com.bd.pojo.OrderStatus;
 import cn.com.bd.pojo.Platform;
+import org.apache.flink.api.common.ExecutionConfig;
+import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
+import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.BroadcastStream;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -48,7 +51,7 @@ public class BroadCast {
             TypeInformation.of(Platform.class));
 
     public static void main( String[] args) throws Exception {
-        String serverIp = "192.168.235.12";
+        String serverIp = "192.168.243.21";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStream<Order> orderStream = env.socketTextStream(serverIp, 9990, "\n")
                 .map(new OrderMap());

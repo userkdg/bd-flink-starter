@@ -30,7 +30,7 @@ import org.apache.flink.util.Collector;
  *      可以参考ProcessFunctionWindowAgg里的样例代码。
  */
 public class WindowAgg {
-    private static String SERVER_IP = "192.168.235.12";
+    private static String SERVER_IP = "192.168.243.21";
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

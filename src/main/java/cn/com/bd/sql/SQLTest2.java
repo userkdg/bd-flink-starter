@@ -57,7 +57,7 @@ public class SQLTest2 {
             + " (select cast(orderCode as varchar) as order_code, cast(payment as varchar) as payment, platform from " + ORDER_TABLE + ") temp_order";
 
     public static void main(String[] args) throws Exception {
-        String serverIp = "192.168.235.12";
+        String serverIp = "192.168.243.21";
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         EnvironmentSettings settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env, settings);

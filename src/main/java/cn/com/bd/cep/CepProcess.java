@@ -49,7 +49,7 @@ import java.util.Map;
 public class CepProcess {
     public static void main(String[] args) throws Exception {
         //服务器ip
-        String serverIp = "192.168.235.12";
+        String serverIp = "192.168.243.21";
         //创建Flink执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         //设置为事件时间
