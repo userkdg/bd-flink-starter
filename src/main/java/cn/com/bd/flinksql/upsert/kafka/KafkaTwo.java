@@ -10,7 +10,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.http.client.RedirectStrategy;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-02-07 13:55
  * @description
  */

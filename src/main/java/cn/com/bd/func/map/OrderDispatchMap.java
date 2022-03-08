@@ -5,7 +5,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.flink.api.common.functions.MapFunction;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2020-07-06 15:30
  * @description
  */

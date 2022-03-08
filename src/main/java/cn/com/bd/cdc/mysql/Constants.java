@@ -1,7 +1,7 @@
 package cn.com.bd.cdc.mysql;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-04-06 15:11
  * @description
  */

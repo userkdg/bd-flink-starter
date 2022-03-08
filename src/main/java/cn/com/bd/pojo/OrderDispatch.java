@@ -3,7 +3,7 @@ package cn.com.bd.pojo;
 import lombok.Data;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2020-07-06 15:25
  * @description
  */

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-05-13 15:59
  * @description changelog数据格式序列化
  */

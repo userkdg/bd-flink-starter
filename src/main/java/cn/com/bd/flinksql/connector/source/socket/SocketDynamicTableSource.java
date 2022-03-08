@@ -12,7 +12,7 @@ import org.apache.flink.table.data.RowData;
 import org.apache.flink.table.types.DataType;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-05-13 15:41
  * @description
  */

@@ -9,7 +9,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-01-25 9:20
  * @description FlinkSQL 主键测试
  */

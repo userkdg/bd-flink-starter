@@ -19,7 +19,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
  */
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-01-19 14:59
  * @description FLinkSQL 双流join Demo
  */

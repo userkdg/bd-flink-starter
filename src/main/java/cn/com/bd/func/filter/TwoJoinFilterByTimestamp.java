@@ -24,7 +24,7 @@ import java.io.Serializable;
  *   连接，在使用时不需要指定主键生成器，只需要使用默认的即可。
  * 2.两个流join生成的数据，需要指定两个时间戳，代表两个流数据的生成时间，在过滤时，只需要取两个时间戳都是最大的那
  *   条join数据。
- * @author 刘天能
+ * @author admin
  * @createAt 2021-02-05 9:14
  * @description
  */

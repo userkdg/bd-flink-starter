@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-05-13 15:39
  * @description socket动态表工厂类
  */

@@ -1,7 +1,7 @@
 package cn.com.bd.flinksql.common;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-02-02 10:41
  * @description 测试不存在函数的SQL
  */

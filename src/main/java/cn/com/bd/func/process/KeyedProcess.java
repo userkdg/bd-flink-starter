@@ -10,7 +10,7 @@ import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2020-09-22 14:24
  * @description
  */

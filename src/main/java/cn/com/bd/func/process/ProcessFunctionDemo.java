@@ -25,7 +25,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  */
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2020-09-22 14:20
  * @description process Function 案例
  */

@@ -7,7 +7,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.table.runtime.functions.SqlUnnestUtils;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-04-25 15:52
  * @description Flinksql 列转行示例
  */

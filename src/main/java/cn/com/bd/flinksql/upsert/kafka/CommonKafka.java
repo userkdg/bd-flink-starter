@@ -15,7 +15,7 @@ import org.apache.flink.types.Row;
 import java.util.Random;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-02-08 9:52
  * @description
  */

@@ -5,7 +5,7 @@ import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-04-06 15:06
  * @description Flink mysql CDC Demo
  */

@@ -13,7 +13,7 @@ import org.apache.flink.types.RowKind;
 import java.util.List;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-05-13 15:59
  * @description
  */

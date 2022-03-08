@@ -7,7 +7,7 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2021-02-04 15:41
  * @description
  */

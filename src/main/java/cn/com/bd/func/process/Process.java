@@ -6,7 +6,7 @@ import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createAt 2020-09-22 15:01
  * @description output分流
  */

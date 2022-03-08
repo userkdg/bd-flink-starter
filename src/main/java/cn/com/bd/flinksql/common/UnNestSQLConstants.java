@@ -1,7 +1,7 @@
 package cn.com.bd.flinksql.common;
 
 /**
- * @author 刘天能
+ * @author admin
  * @createdAt 2021-04-25 15:54
  * @description
  */
